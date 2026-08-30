@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FinLit AI — Digital Financial Literacy Agent</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+  <div class="app-shell">
+
+    <!-- ░░ SIDEBAR ░░ -->
+    <aside class="sidebar" id="sidebar">
+
+      <!-- Mesh orbs (pure CSS) -->
+      <div class="sidebar-orb sidebar-orb--1" aria-hidden="true"></div>
+      <div class="sidebar-orb sidebar-orb--2" aria-hidden="true"></div>
+
+      <div class="sidebar-inner">
+        <!-- Brand -->
+        <div class="sidebar-brand">
+          <div class="brand-logo" aria-hidden="true">
+            <svg viewBox="0 0 40 40" fill="none" width="40" height="40">
+              <defs>
+                <linearGradient id="lg1" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#818cf8"/>
+                  <stop offset="1" stop-color="#c084fc"/>
+                </linearGradient>
+              </defs>
+              <rect width="40" height="40" rx="12" fill="url(#lg1)" opacity="0.15"/>
+              <rect width="40" height="40" rx="12" fill="none" stroke="url(#lg1)" stroke-width="1.5" opacity="0.6"/>
+              <path d="M12 26 L20 10 L28 26" stroke="url(#lg1)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M15 26 h10" stroke="url(#lg1)" stroke-width="2.4" stroke-linecap="round"/>
+              <circle cx="20" cy="30" r="1.8" fill="#c084fc" opacity="0.9"/>
+            </svg>
+          </div>
+          <div>
+            <div class="brand-name">FinLit <span class="brand-ai">AI</span></div>
+            <div class="brand-tagline">Financial Literacy Agent</div>
+          </div>
+        </div>
+
+        <!-- Live status -->
+        <div class="status-pill">
+          <span class="status-dot"></span>
+          <span>Online &amp; Ready</span>
+          <span class="status-version">v2.0</span>
+        </div>
+
+        <!-- Stats row -->
+        <div class="stats-row">
+          <div class="stat-card">
+            <span class="stat-num">5</span>
+            <span class="stat-lbl">Topics</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-num">24/7</span>
+            <span class="stat-lbl">Available</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-num">Free</span>
+            <span class="stat-lbl">Always</span>
+          </div>
+        </div>
+
+        <!-- Capabilities -->
+        <nav class="capability-list">
+          <p class="capability-heading">
+            <svg viewBox="0 0 16 16" fill="none" width="12" height="12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="6"/><line x1="8" y1="5" x2="8" y2="8"/><line x1="8" y1="11" x2="8.01" y2="11"/></svg>
+            Capabilities
+          </p>
+          <ul>
+            <li class="cap-item" tabindex="0">
+              <span class="cap-icon-wrap cap-icon-wrap--blue">💳</span>
+              <div class="cap-text">
+                <span class="cap-title">Safe UPI Payments</span>
+                <span class="cap-desc">Tips to transact securely</span>
+              </div>
+            </li>
+            <li class="cap-item" tabindex="0">
+              <span class="cap-icon-wrap cap-icon-wrap--amber">🔍</span>
+              <div class="cap-text">
+                <span class="cap-title">Scam Detection</span>
+                <span class="cap-desc">Spot loan &amp; investment fraud</span>
+              </div>
+            </li>
+            <li class="cap-item" tabindex="0">
+              <span class="cap-icon-wrap cap-icon-wrap--teal">📄</span>
+              <div class="cap-text">
+                <span class="cap-title">Loan Terms &amp; EMI</span>
+                <span class="cap-desc">Understand borrowing costs</span>
+              </div>
+            </li>
+            <li class="cap-item" tabindex="0">
+              <span class="cap-icon-wrap cap-icon-wrap--violet">📊</span>
+              <div class="cap-text">
+                <span class="cap-title">Personal Budgeting</span>
+                <span class="cap-desc">Plan &amp; grow your savings</span>
+              </div>
+            </li>
+            <li class="cap-item cap-item--alert" tabindex="0">
+              <span class="cap-icon-wrap cap-icon-wrap--red">📞</span>
+              <div class="cap-text">
+                <span class="cap-title">Cyber Fraud Helpline</span>
+                <span class="cap-desc">Call <strong>1930</strong> immediately</span>
+              </div>
+            </li>
+          </ul>
+        </nav>
+
+        <!-- Footer -->
+        <div class="sidebar-footer">
+          <button id="resetBtn" class="reset-btn">
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"
+                 stroke-linecap="round" stroke-linejoin="round" width="15" height="15">
+              <path d="M4 10a6 6 0 1 1 1.5 4"/>
+              <polyline points="4 14 4 10 8 10"/>
+            </svg>
+            New Conversation
+          </button>
+          <p class="sidebar-legal">🔒 SEBI guidelines apply. Not financial advice.</p>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ░░ OVERLAY (mobile) ░░ -->
+    <div class="overlay" id="overlay" aria-hidden="true"></div>
+
+    <!-- ░░ MAIN CHAT ░░ -->
+    <main class="chat-area">
+
+      <!-- Header -->
+      <header class="chat-header">
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open menu">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+               stroke-linecap="round" stroke-linejoin="round" width="20" height="20">
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <line x1="3" y1="12" x2="15" y2="12"/>
+            <line x1="3" y1="18" x2="21" y2="18"/>
+          </svg>
+        </button>
+
+        <div class="header-agent">
+          <div class="header-avatar-ring">
+            <svg viewBox="0 0 32 32" fill="none" width="32" height="32">
+              <defs>
+                <linearGradient id="hlg" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#818cf8"/>
+                  <stop offset="1" stop-color="#c084fc"/>
+                </linearGradient>
+              </defs>
+              <rect width="32" height="32" rx="10" fill="url(#hlg)"/>
+              <path d="M8 20 L16 8 L24 20" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M11 20 h10" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/>
+            </svg>
+            <span class="header-avatar-status" aria-hidden="true"></span>
+          </div>
+          <div>
+            <p class="header-title">Digital Financial Literacy Agent</p>
+            <p class="header-subtitle">
+              <span class="header-dot"></span>
+              Powered by AI · India focus
+            </p>
+          </div>
+        </div>
+
+        <div class="header-right">
+          <div class="header-chip">🇮🇳 <span>India</span></div>
+          <button class="header-icon-btn" id="themeBtn" aria-label="Toggle theme" title="Toggle dark mode">
+            <svg id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                 stroke-linecap="round" stroke-linejoin="round" width="18" height="18">
+              <circle cx="12" cy="12" r="5"/>
+              <line x1="12" y1="1" x2="12" y2="3"/>
+              <line x1="12" y1="21" x2="12" y2="23"/>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+              <line x1="1" y1="12" x2="3" y2="12"/>
+              <line x1="21" y1="12" x2="23" y2="12"/>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+            </svg>
+          </button>
+        </div>
+      </header>
+
+      <!-- Messages -->
+      <div class="chat-messages" id="chatMessages">
+
+        <!-- Date separator -->
+        <div class="date-separator"><span id="todayLabel"></span></div>
+
+        <!-- Welcome message -->
+        <div class="message assistant message--enter message--visible">
+          <div class="msg-avatar-wrap">
+            <div class="msg-avatar">
+              <svg viewBox="0 0 28 28" fill="none" width="28" height="28">
+                <defs>
+                  <linearGradient id="ag1" x1="0" y1="0" x2="28" y2="28" gradientUnits="userSpaceOnUse">
+                    <stop stop-color="#818cf8"/>
+                    <stop offset="1" stop-color="#c084fc"/>
+                  </linearGradient>
+                </defs>
+                <rect width="28" height="28" rx="8" fill="url(#ag1)"/>
+                <path d="M6 18 L14 6 L22 18" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M9 18 h10" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </div>
+          </div>
+          <div class="msg-content">
+            <div class="msg-sender-name">FinLit AI</div>
+            <div class="bubble">
+              <p>Namaste! 🙏 I'm your <strong>Digital Financial Literacy Agent</strong>.</p>
+              <p style="margin-top:10px">Here's what I can help you with:</p>
+              <div class="welcome-grid">
+                <div class="welcome-card">💳 <span>Safe UPI Payments</span></div>
+                <div class="welcome-card">🔍 <span>Scam Detection</span></div>
+                <div class="welcome-card">📄 <span>Loan &amp; EMI</span></div>
+                <div class="welcome-card">📊 <span>Budgeting</span></div>
+                <div class="welcome-card welcome-card--alert">📞 <span>Helpline <strong>1930</strong></span></div>
+              </div>
+              <p style="margin-top:12px">How can I help you today? 👇</p>
+            </div>
+            <div class="msg-meta">
+              <span class="msg-time" id="welcomeTime"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scroll-to-bottom FAB -->
+      <button class="scroll-fab" id="scrollFab" aria-label="Scroll to bottom" hidden>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+             stroke-linecap="round" stroke-linejoin="round" width="16" height="16">
+          <polyline points="6 9 12 15 18 9"/>
+        </svg>
+      </button>
+
+      <!-- Suggestion chips -->
+      <div class="suggestions" id="suggestions">
+        <div class="suggestions-label">✨ Try asking</div>
+        <div class="chips-row">
+          <button class="chip" data-msg="How do I make safe UPI payments?">💳 Safe UPI tips</button>
+          <button class="chip" data-msg="How can I spot a loan scam?">🔍 Spot a scam</button>
+          <button class="chip" data-msg="Explain what EMI means">📄 What is EMI?</button>
+          <button class="chip" data-msg="How do I start budgeting my salary?">📊 Budgeting</button>
+          <button class="chip chip--danger" data-msg="I think I've been scammed. What should I do?">📞 Report fraud (1930)</button>
+        </div>
+      </div>
+
+      <!-- Input bar -->
+      <div class="input-bar">
+        <form class="input-form" id="chatForm" autocomplete="off">
+          <div class="input-card" id="inputCard">
+            <textarea
+              id="userInput"
+              class="input-field"
+              placeholder="Ask about UPI safety, scams, EMI, budgeting…"
+              rows="1"
+              maxlength="2000"
+              aria-label="Message input"
+            ></textarea>
+            <div class="input-footer">
+              <span class="char-hint" id="charCount"></span>
+              <div class="input-btns">
+                <button type="submit" class="send-btn" id="sendBtn" aria-label="Send message" disabled>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                       stroke-linecap="round" stroke-linejoin="round" width="17" height="17">
+                    <line x1="22" y1="2" x2="11" y2="13"/>
+                    <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+        <p class="disclaimer">🔒 General financial literacy only — not personalised advice. Consult a SEBI-registered advisor.</p>
+      </div>
+
+    </main>
+  </div><!-- /.app-shell -->
+
+  <script>
+  (() => {
+    /* ── helpers ── */
+    const $ = id => document.getElementById(id);
+    function fmt(d){ return d.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'}); }
+
+    /* ── init ── */
+    $('welcomeTime').textContent = fmt(new Date());
+    $('todayLabel').textContent  = new Date().toLocaleDateString([],{weekday:'long',month:'long',day:'numeric'});
+
+    const chatMessages = $('chatMessages');
+    const chatForm     = $('chatForm');
+    const userInput    = $('userInput');
+    const sendBtn      = $('sendBtn');
+    const resetBtn     = $('resetBtn');
+    const suggestions  = $('suggestions');
+    const charCount    = $('charCount');
+    const scrollFab    = $('scrollFab');
+    const sidebar      = $('sidebar');
+    const overlay      = $('overlay');
+    const themeBtn     = $('themeBtn');
+
+    /* ── dark mode ── */
+    const DARK_KEY = 'finlit-dark';
+    function applyTheme(dark){
+      document.body.classList.toggle('dark', dark);
+      localStorage.setItem(DARK_KEY, dark ? '1' : '');
+    }
+    applyTheme(localStorage.getItem(DARK_KEY) === '1');
+    themeBtn.addEventListener('click', () => applyTheme(!document.body.classList.contains('dark')));
+
+    /* ── mobile sidebar ── */
+    function openSidebar(){
+      sidebar.classList.add('sidebar--open');
+      overlay.classList.add('overlay--show');
+      overlay.removeAttribute('aria-hidden');
+    }
+    function closeSidebar(){
+      sidebar.classList.remove('sidebar--open');
+      overlay.classList.remove('overlay--show');
+      overlay.setAttribute('aria-hidden','true');
+    }
+    $('mobileMenuBtn').addEventListener('click', openSidebar);
+    overlay.addEventListener('click', closeSidebar);
+
+    /* ── scroll fab ── */
+    chatMessages.addEventListener('scroll', () => {
+      const atBottom = chatMessages.scrollHeight - chatMessages.scrollTop - chatMessages.clientHeight < 80;
+      scrollFab.hidden = atBottom;
+    });
+    scrollFab.addEventListener('click', () => {
+      chatMessages.scrollTo({top: chatMessages.scrollHeight, behavior:'smooth'});
+    });
+
+    /* ── textarea auto-grow ── */
+    userInput.addEventListener('input', () => {
+      userInput.style.height = 'auto';
+      userInput.style.height = Math.min(userInput.scrollHeight, 150) + 'px';
+      const len = userInput.value.length;
+      charCount.textContent = len > 0 ? `${len} / 2000` : '';
+      sendBtn.disabled = userInput.value.trim().length === 0;
+      sendBtn.classList.toggle('send-btn--active', !sendBtn.disabled);
+    });
+
+    userInput.addEventListener('keydown', e => {
+      if(e.key==='Enter' && !e.shiftKey){ e.preventDefault(); if(!sendBtn.disabled) chatForm.requestSubmit(); }
+    });
+
+    /* ── suggestion chips ── */
+    document.querySelectorAll('.chip').forEach(btn => {
+      btn.addEventListener('click', () => {
+        suggestions.classList.add('suggestions--hide');
+        setTimeout(() => suggestions.remove(), 280);
+        sendMessage(btn.dataset.msg);
+      });
+    });
+
+    /* ── form submit ── */
+    chatForm.addEventListener('submit', e => {
+      e.preventDefault();
+      const text = userInput.value.trim();
+      if(!text) return;
+      hideSuggestions();
+      sendMessage(text);
+    });
+
+    function hideSuggestions(){
+      if(!suggestions.parentNode) return;
+      suggestions.classList.add('suggestions--hide');
+      setTimeout(() => { try { suggestions.remove(); } catch{} }, 280);
+    }
+
+    /* ── reset ── */
+    resetBtn.addEventListener('click', async () => {
+      await fetch('/reset',{method:'POST'});
+      chatMessages.innerHTML = '';
+      addDateSep(new Date().toLocaleDateString([],{weekday:'long',month:'long',day:'numeric'}));
+      closeSidebar();
+      appendMessage('assistant','✅ Conversation reset. How can I help you with financial literacy today?');
+      // re-inject suggestion chips
+      const sg = buildSuggestions();
+      chatMessages.parentNode.insertBefore(sg, chatMessages.nextSibling);
+    });
+
+    function buildSuggestions(){
+      const div = document.createElement('div');
+      div.className = 'suggestions';
+      div.id = 'suggestionsNew';
+      div.innerHTML = `
+        <div class="suggestions-label">✨ Try asking</div>
+        <div class="chips-row">
+          <button class="chip" data-msg="How do I make safe UPI payments?">💳 Safe UPI tips</button>
+          <button class="chip" data-msg="How can I spot a loan scam?">🔍 Spot a scam</button>
+          <button class="chip" data-msg="Explain what EMI means">📄 What is EMI?</button>
+          <button class="chip" data-msg="How do I start budgeting my salary?">📊 Budgeting</button>
+          <button class="chip chip--danger" data-msg="I think I've been scammed. What should I do?">📞 Report fraud (1930)</button>
+        </div>`;
+      div.querySelectorAll('.chip').forEach(btn => {
+        btn.addEventListener('click', () => {
+          div.classList.add('suggestions--hide');
+          setTimeout(() => { try { div.remove(); } catch{} }, 280);
+          sendMessage(btn.dataset.msg);
+        });
+      });
+      return div;
+    }
+
+    /* ── send ── */
+    async function sendMessage(text){
+      appendMessage('user', text);
+      userInput.value = '';
+      userInput.style.height = 'auto';
+      charCount.textContent = '';
+      sendBtn.disabled = true;
+      sendBtn.classList.remove('send-btn--active');
+      const typing = appendTyping();
+      try {
+        const res  = await fetch('/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:text})});
+        const data = await res.json();
+        typing.remove();
+        appendMessage('assistant', data.error ? '⚠️ ' + data.error : data.reply);
+      } catch {
+        typing.remove();
+        appendMessage('assistant','⚠️ Network error. Please check your connection and try again.');
+      } finally {
+        sendBtn.disabled = false;
+        userInput.focus();
+      }
+    }
+
+    /* ── append message ── */
+    function appendMessage(role, text){
+      const wrapper = document.createElement('div');
+      wrapper.className = `message ${role} message--enter`;
+
+      if(role==='assistant'){
+        wrapper.innerHTML = `
+          <div class="msg-avatar-wrap">
+            <div class="msg-avatar">
+              <svg viewBox="0 0 28 28" fill="none" width="28" height="28">
+                <defs><linearGradient id="ag2" x1="0" y1="0" x2="28" y2="28" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#818cf8"/><stop offset="1" stop-color="#c084fc"/>
+                </linearGradient></defs>
+                <rect width="28" height="28" rx="8" fill="url(#ag2)"/>
+                <path d="M6 18 L14 6 L22 18" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M9 18 h10" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </div>
+          </div>
+          <div class="msg-content">
+            <div class="msg-sender-name">FinLit AI</div>
+            <div class="bubble">${renderMarkdown(text)}</div>
+            <div class="msg-meta">
+              <span class="msg-time">${fmt(new Date())}</span>
+            </div>
+          </div>`;
+      } else {
+        wrapper.innerHTML = `
+          <div class="msg-content">
+            <div class="bubble">${escapeHtml(text).replace(/\n/g,'<br>')}</div>
+            <div class="msg-meta">
+              <span class="msg-time">${fmt(new Date())}</span>
+              <span class="msg-status">
+                <svg viewBox="0 0 16 10" fill="none" width="16" height="10">
+                  <path d="M1 5l4 4L15 1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M5 5l4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+            </div>
+          </div>`;
+      }
+
+      chatMessages.appendChild(wrapper);
+      chatMessages.scrollTo({top:chatMessages.scrollHeight,behavior:'smooth'});
+      requestAnimationFrame(() => wrapper.classList.add('message--visible'));
+      return wrapper;
+    }
+
+    /* ── typing indicator ── */
+    function appendTyping(){
+      const wrapper = document.createElement('div');
+      wrapper.className = 'message assistant message--enter message--visible';
+      wrapper.innerHTML = `
+        <div class="msg-avatar-wrap">
+          <div class="msg-avatar">
+            <svg viewBox="0 0 28 28" fill="none" width="28" height="28">
+              <defs><linearGradient id="ag3" x1="0" y1="0" x2="28" y2="28" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#818cf8"/><stop offset="1" stop-color="#c084fc"/>
+              </linearGradient></defs>
+              <rect width="28" height="28" rx="8" fill="url(#ag3)"/>
+              <path d="M6 18 L14 6 L22 18" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M9 18 h10" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+        </div>
+        <div class="msg-content">
+          <div class="bubble typing">
+            <span></span><span></span><span></span>
+            <span class="typing-label">Thinking…</span>
+          </div>
+        </div>`;
+      chatMessages.appendChild(wrapper);
+      chatMessages.scrollTo({top:chatMessages.scrollHeight,behavior:'smooth'});
+      return wrapper;
+    }
+
+    /* ── date separator helper ── */
+    function addDateSep(label){
+      const div = document.createElement('div');
+      div.className = 'date-separator';
+      div.innerHTML = `<span>${label}</span>`;
+      chatMessages.appendChild(div);
+    }
+
+    /* ── minimal markdown renderer ── */
+    function renderMarkdown(text){
+      let h = escapeHtml(text);
+      // bold
+      h = h.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+      // italic
+      h = h.replace(/\*(.+?)\*/g, '<em>$1</em>');
+      // inline code
+      h = h.replace(/`([^`]+)`/g, '<code class="inline-code">$1</code>');
+      // bullet lists (lines starting with - or •)
+      h = h.replace(/^[-•]\s+(.+)$/gm, '<li>$1</li>');
+      h = h.replace(/(<li>.*<\/li>)/s, '<ul class="md-list">$1</ul>');
+      // numbered lists
+      h = h.replace(/^\d+\.\s+(.+)$/gm, '<li>$1</li>');
+      // newlines → br (only outside list)
+      h = h.replace(/\n/g, '<br>');
+      return h;
+    }
+
+    function escapeHtml(t){
+      return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+  })();
+  </script>
+</body>
+</html>
