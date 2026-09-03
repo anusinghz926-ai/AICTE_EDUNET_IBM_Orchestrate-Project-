@@ -876,6 +876,41 @@ body.dark .input-card:focus-within { background: rgba(255,255,255,0.07); }
 }
 .send-btn--active:active { transform: scale(0.94); }
 
+/* ── Mic Button ─────────────────────────────────────── */
+.mic-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  border: 1.5px solid var(--border);
+  background: transparent;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--t);
+  flex-shrink: 0;
+  position: relative;
+}
+.mic-btn:hover {
+  border-color: var(--indigo-400);
+  color: var(--indigo-500);
+  background: rgba(99,102,241,0.06);
+}
+.mic-btn--active {
+  border-color: var(--danger);
+  color: var(--danger);
+  background: var(--danger-light);
+  animation: mic-pulse 1.2s ease-in-out infinite;
+}
+.mic-btn--active:hover {
+  background: #fee2e2;
+}
+@keyframes mic-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(239,68,68,0.35); }
+  50%       { box-shadow: 0 0 0 7px rgba(239,68,68,0); }
+}
+
 /* Disclaimer */
 .disclaimer {
   font-size: 10.5px;

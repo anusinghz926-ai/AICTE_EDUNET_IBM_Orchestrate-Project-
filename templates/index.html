@@ -39,7 +39,7 @@
           </div>
           <div>
             <div class="brand-name">FinLit <span class="brand-ai">AI</span></div>
-            <div class="brand-tagline">Financial Literacy Agent</div>
+            <div class="brand-tagline">India Finance Assistant</div>
           </div>
         </div>
 
@@ -53,7 +53,7 @@
         <!-- Stats row -->
         <div class="stats-row">
           <div class="stat-card">
-            <span class="stat-num">5</span>
+            <span class="stat-num">9</span>
             <span class="stat-lbl">Topics</span>
           </div>
           <div class="stat-card">
@@ -73,6 +73,34 @@
             Capabilities
           </p>
           <ul>
+            <li class="cap-item" tabindex="0">
+              <span class="cap-icon-wrap cap-icon-wrap--teal">🏦</span>
+              <div class="cap-text">
+                <span class="cap-title">FD Comparisons</span>
+                <span class="cap-desc">Kotak, ICICI, SBI, HDFC &amp; more</span>
+              </div>
+            </li>
+            <li class="cap-item" tabindex="0">
+              <span class="cap-icon-wrap cap-icon-wrap--violet">📈</span>
+              <div class="cap-text">
+                <span class="cap-title">Stock Market</span>
+                <span class="cap-desc">NSE, BSE, IPO, analysis</span>
+              </div>
+            </li>
+            <li class="cap-item" tabindex="0">
+              <span class="cap-icon-wrap cap-icon-wrap--amber">💼</span>
+              <div class="cap-text">
+                <span class="cap-title">Mutual Funds</span>
+                <span class="cap-desc">SIP, ELSS, index funds</span>
+              </div>
+            </li>
+            <li class="cap-item" tabindex="0">
+              <span class="cap-icon-wrap cap-icon-wrap--blue">₿</span>
+              <div class="cap-text">
+                <span class="cap-title">Cryptocurrency</span>
+                <span class="cap-desc">Crypto, tax rules, exchanges</span>
+              </div>
+            </li>
             <li class="cap-item" tabindex="0">
               <span class="cap-icon-wrap cap-icon-wrap--blue">💳</span>
               <div class="cap-text">
@@ -97,8 +125,8 @@
             <li class="cap-item" tabindex="0">
               <span class="cap-icon-wrap cap-icon-wrap--violet">📊</span>
               <div class="cap-text">
-                <span class="cap-title">Personal Budgeting</span>
-                <span class="cap-desc">Plan &amp; grow your savings</span>
+                <span class="cap-title">PPF / NPS / Gold</span>
+                <span class="cap-desc">Safe long-term investments</span>
               </div>
             </li>
             <li class="cap-item cap-item--alert" tabindex="0">
@@ -159,7 +187,7 @@
             <span class="header-avatar-status" aria-hidden="true"></span>
           </div>
           <div>
-            <p class="header-title">Digital Financial Literacy Agent</p>
+            <p class="header-title">FinanceGuru — India Finance Assistant</p>
             <p class="header-subtitle">
               <span class="header-dot"></span>
               Powered by AI · India focus
@@ -212,13 +240,17 @@
           <div class="msg-content">
             <div class="msg-sender-name">FinLit AI</div>
             <div class="bubble">
-              <p>Namaste! 🙏 I'm your <strong>Digital Financial Literacy Agent</strong>.</p>
-              <p style="margin-top:10px">Here's what I can help you with:</p>
+              <p>Namaste! 🙏 I'm <strong>FinanceGuru</strong> — your complete India finance assistant.</p>
+              <p style="margin-top:10px">I give direct answers on <em>all</em> financial topics:</p>
               <div class="welcome-grid">
-                <div class="welcome-card">💳 <span>Safe UPI Payments</span></div>
+                <div class="welcome-card">🏦 <span>FD Comparisons</span></div>
+                <div class="welcome-card">📈 <span>Stock Market</span></div>
+                <div class="welcome-card">💼 <span>Mutual Funds</span></div>
+                <div class="welcome-card">₿ <span>Crypto</span></div>
+                <div class="welcome-card">💳 <span>UPI Safety</span></div>
                 <div class="welcome-card">🔍 <span>Scam Detection</span></div>
                 <div class="welcome-card">📄 <span>Loan &amp; EMI</span></div>
-                <div class="welcome-card">📊 <span>Budgeting</span></div>
+                <div class="welcome-card">📊 <span>PPF / NPS / Gold</span></div>
                 <div class="welcome-card welcome-card--alert">📞 <span>Helpline <strong>1930</strong></span></div>
               </div>
               <p style="margin-top:12px">How can I help you today? 👇</p>
@@ -242,10 +274,11 @@
       <div class="suggestions" id="suggestions">
         <div class="suggestions-label">✨ Try asking</div>
         <div class="chips-row">
+          <button class="chip" data-msg="I have ₹5 lakhs. Should I open FD in Kotak or ICICI for 1 year?">🏦 Kotak vs ICICI FD</button>
+          <button class="chip" data-msg="How do I start investing in the stock market as a beginner?">📈 Start investing</button>
+          <button class="chip" data-msg="Which mutual fund is best for SIP of ₹5000 per month?">💼 Best SIP fund</button>
+          <button class="chip" data-msg="Should I invest in Bitcoin or crypto in India?">₿ Invest in crypto?</button>
           <button class="chip" data-msg="How do I make safe UPI payments?">💳 Safe UPI tips</button>
-          <button class="chip" data-msg="How can I spot a loan scam?">🔍 Spot a scam</button>
-          <button class="chip" data-msg="Explain what EMI means">📄 What is EMI?</button>
-          <button class="chip" data-msg="How do I start budgeting my salary?">📊 Budgeting</button>
           <button class="chip chip--danger" data-msg="I think I've been scammed. What should I do?">📞 Report fraud (1930)</button>
         </div>
       </div>
@@ -257,7 +290,7 @@
             <textarea
               id="userInput"
               class="input-field"
-              placeholder="Ask about UPI safety, scams, EMI, budgeting…"
+              placeholder="Ask about FD rates, stocks, mutual funds, crypto, UPI, loans…"
               rows="1"
               maxlength="2000"
               aria-label="Message input"
@@ -265,6 +298,15 @@
             <div class="input-footer">
               <span class="char-hint" id="charCount"></span>
               <div class="input-btns">
+                <button type="button" class="mic-btn" id="micBtn" aria-label="Voice input" title="Hold to speak">
+                  <svg id="micIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                       stroke-linecap="round" stroke-linejoin="round" width="17" height="17">
+                    <rect x="9" y="2" width="6" height="12" rx="3"/>
+                    <path d="M5 10a7 7 0 0 0 14 0"/>
+                    <line x1="12" y1="19" x2="12" y2="22"/>
+                    <line x1="9" y1="22" x2="15" y2="22"/>
+                  </svg>
+                </button>
                 <button type="submit" class="send-btn" id="sendBtn" aria-label="Send message" disabled>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
                        stroke-linecap="round" stroke-linejoin="round" width="17" height="17">
@@ -276,7 +318,7 @@
             </div>
           </div>
         </form>
-        <p class="disclaimer">🔒 General financial literacy only — not personalised advice. Consult a SEBI-registered advisor.</p>
+        <p class="disclaimer">🔒 For educational purposes. Verify rates on official bank/exchange websites before investing.</p>
       </div>
 
     </main>
@@ -380,7 +422,7 @@
       chatMessages.innerHTML = '';
       addDateSep(new Date().toLocaleDateString([],{weekday:'long',month:'long',day:'numeric'}));
       closeSidebar();
-      appendMessage('assistant','✅ Conversation reset. How can I help you with financial literacy today?');
+      appendMessage('assistant','✅ Conversation reset. Ask me about FD rates, stocks, mutual funds, crypto, UPI safety, or anything else finance-related!');
       // re-inject suggestion chips
       const sg = buildSuggestions();
       chatMessages.parentNode.insertBefore(sg, chatMessages.nextSibling);
@@ -393,10 +435,11 @@
       div.innerHTML = `
         <div class="suggestions-label">✨ Try asking</div>
         <div class="chips-row">
+          <button class="chip" data-msg="I have ₹5 lakhs. Should I open FD in Kotak or ICICI for 1 year?">🏦 Kotak vs ICICI FD</button>
+          <button class="chip" data-msg="How do I start investing in the stock market as a beginner?">📈 Start investing</button>
+          <button class="chip" data-msg="Which mutual fund is best for SIP of ₹5000 per month?">💼 Best SIP fund</button>
+          <button class="chip" data-msg="Should I invest in Bitcoin or crypto in India?">₿ Invest in crypto?</button>
           <button class="chip" data-msg="How do I make safe UPI payments?">💳 Safe UPI tips</button>
-          <button class="chip" data-msg="How can I spot a loan scam?">🔍 Spot a scam</button>
-          <button class="chip" data-msg="Explain what EMI means">📄 What is EMI?</button>
-          <button class="chip" data-msg="How do I start budgeting my salary?">📊 Budgeting</button>
           <button class="chip chip--danger" data-msg="I think I've been scammed. What should I do?">📞 Report fraud (1930)</button>
         </div>`;
       div.querySelectorAll('.chip').forEach(btn => {
@@ -538,6 +581,80 @@
     function escapeHtml(t){
       return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
     }
+
+    /* ── Voice Input (Web Speech API) ── */
+    const micBtn = $('micBtn');
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+    if (!SpeechRecognition) {
+      micBtn.title = 'Voice input not supported in this browser';
+      micBtn.style.opacity = '0.35';
+      micBtn.disabled = true;
+    } else {
+      const recognition = new SpeechRecognition();
+      recognition.lang = 'en-IN';
+      recognition.interimResults = true;
+      recognition.maxAlternatives = 1;
+      let isListening = false;
+      let interimText = '';
+
+      recognition.addEventListener('start', () => {
+        isListening = true;
+        micBtn.classList.add('mic-btn--active');
+        micBtn.setAttribute('aria-label', 'Listening… click to stop');
+        userInput.placeholder = '🎙️ Listening…';
+      });
+
+      recognition.addEventListener('result', e => {
+        let interim = '';
+        let final = '';
+        for (let i = e.resultIndex; i < e.results.length; i++) {
+          const t = e.results[i][0].transcript;
+          if (e.results[i].isFinal) final += t;
+          else interim += t;
+        }
+        interimText = interim;
+        if (final) {
+          userInput.value = (userInput.value + ' ' + final).trim();
+          userInput.dispatchEvent(new Event('input'));
+        }
+        // show interim as placeholder hint
+        if (interim) userInput.placeholder = interim;
+      });
+
+      recognition.addEventListener('end', () => {
+        isListening = false;
+        micBtn.classList.remove('mic-btn--active');
+        micBtn.setAttribute('aria-label', 'Voice input');
+        userInput.placeholder = 'Ask about FD rates, stocks, mutual funds, crypto, UPI, loans…';
+        interimText = '';
+        // auto-send if something was captured and field is non-empty
+        if (userInput.value.trim()) {
+          sendBtn.disabled = false;
+          sendBtn.classList.add('send-btn--active');
+        }
+      });
+
+      recognition.addEventListener('error', e => {
+        isListening = false;
+        micBtn.classList.remove('mic-btn--active');
+        userInput.placeholder = 'Ask about FD rates, stocks, mutual funds, crypto, UPI, loans…';
+        if (e.error !== 'no-speech' && e.error !== 'aborted') {
+          appendMessage('assistant', '⚠️ Microphone error: ' + e.error + '. Please check browser permissions.');
+        }
+      });
+
+      micBtn.addEventListener('click', () => {
+        if (isListening) {
+          recognition.stop();
+        } else {
+          userInput.value = '';
+          userInput.dispatchEvent(new Event('input'));
+          recognition.start();
+        }
+      });
+    }
+
   })();
   </script>
 </body>
