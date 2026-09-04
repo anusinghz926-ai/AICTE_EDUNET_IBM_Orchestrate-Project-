@@ -559,21 +559,54 @@
       chatMessages.appendChild(div);
     }
 
-    /* ── minimal markdown renderer ── */
+    /* ── markdown renderer (tables + formatting) ── */
     function renderMarkdown(text){
+      // 1. Extract and replace markdown tables before escaping HTML
+      const tables = [];
+      text = text.replace(/(\|.+\|\n)((?:\|[-: ]+\|\n))((?:\|.+\|\n?)*)/g, (match) => {
+        const lines = match.trim().split('\n');
+        const headers = lines[0].split('|').filter(c => c.trim() !== '');
+        const body = lines.slice(2);
+        let html = '<div class="md-table-wrap"><table class="md-table"><thead><tr>';
+        headers.forEach(h => { html += `<th>${h.trim()}</th>`; });
+        html += '</tr></thead><tbody>';
+        body.forEach(row => {
+          if (!row.trim()) return;
+          const cells = row.split('|').filter(c => c.trim() !== '');
+          html += '<tr>';
+          cells.forEach(c => { html += `<td>${c.trim()}</td>`; });
+          html += '</tr>';
+        });
+        html += '</tbody></table></div>';
+        const placeholder = `\x00TABLE${tables.length}\x00`;
+        tables.push(html);
+        return placeholder;
+      });
+
+      // 2. Escape HTML on the remaining non-table text
       let h = escapeHtml(text);
-      // bold
+
+      // 3. Restore tables (unescaped)
+      tables.forEach((t, i) => { h = h.replace(`\x00TABLE${i}\x00`, t); });
+
+      // 4. Headings (### ## #)
+      h = h.replace(/^###\s+(.+)$/gm, '<h4 class="md-h4">$1</h4>');
+      h = h.replace(/^##\s+(.+)$/gm,  '<h3 class="md-h3">$1</h3>');
+      h = h.replace(/^#\s+(.+)$/gm,   '<h2 class="md-h2">$1</h2>');
+      // 5. bold
       h = h.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
-      // italic
+      // 6. italic
       h = h.replace(/\*(.+?)\*/g, '<em>$1</em>');
-      // inline code
+      // 7. inline code
       h = h.replace(/`([^`]+)`/g, '<code class="inline-code">$1</code>');
-      // bullet lists (lines starting with - or •)
+      // 8. horizontal rule
+      h = h.replace(/^---+$/gm, '<hr class="md-hr">');
+      // 9. bullet lists
       h = h.replace(/^[-•]\s+(.+)$/gm, '<li>$1</li>');
-      h = h.replace(/(<li>.*<\/li>)/s, '<ul class="md-list">$1</ul>');
-      // numbered lists
-      h = h.replace(/^\d+\.\s+(.+)$/gm, '<li>$1</li>');
-      // newlines → br (only outside list)
+      h = h.replace(/(<li>[\s\S]*?<\/li>)/g, '<ul class="md-list">$1</ul>');
+      // 10. numbered lists
+      h = h.replace(/^\d+\.\s+(.+)$/gm, '<li class="md-ol-item">$1</li>');
+      // 11. newlines → br
       h = h.replace(/\n/g, '<br>');
       return h;
     }

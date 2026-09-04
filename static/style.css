@@ -674,6 +674,52 @@ body.dark .inline-code {
   border-color: rgba(129,140,248,0.2);
 }
 
+/* ── Markdown Tables ─────────────────────────────────── */
+.md-table-wrap {
+  overflow-x: auto;
+  margin: 10px 0;
+  border-radius: var(--r-sm);
+  border: 1px solid var(--border);
+}
+.md-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  min-width: 280px;
+}
+.md-table th {
+  background: rgba(99,102,241,0.08);
+  color: var(--indigo-600);
+  font-weight: 600;
+  padding: 8px 12px;
+  text-align: left;
+  border-bottom: 1.5px solid var(--border);
+  white-space: nowrap;
+}
+.md-table td {
+  padding: 7px 12px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-2);
+  vertical-align: top;
+}
+.md-table tr:last-child td { border-bottom: none; }
+.md-table tr:nth-child(even) td { background: rgba(99,102,241,0.03); }
+.md-table tr:hover td { background: rgba(99,102,241,0.06); }
+body.dark .md-table th {
+  background: rgba(129,140,248,0.1);
+  color: var(--indigo-400);
+  border-bottom-color: var(--border);
+}
+body.dark .md-table td { border-bottom-color: var(--border); }
+body.dark .md-table tr:nth-child(even) td { background: rgba(129,140,248,0.04); }
+
+/* ── Markdown Headings & HR ──────────────────────────── */
+.md-h2 { font-size: 15px; font-weight: 700; margin: 12px 0 6px; color: var(--text); }
+.md-h3 { font-size: 14px; font-weight: 600; margin: 10px 0 4px; color: var(--text); }
+.md-h4 { font-size: 13.5px; font-weight: 600; margin: 8px 0 4px; color: var(--text-2); }
+.md-hr { border: none; border-top: 1px solid var(--border); margin: 10px 0; }
+.md-ol-item { font-size: 13.5px; margin-left: 18px; display: list-item; list-style: decimal; }
+
 /* ── Typing Indicator ────────────────────────────────── */
 .typing {
   display: flex;
